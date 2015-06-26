@@ -1,0 +1,86 @@
+﻿@model IEnumerable<C.Models.student>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>點名系統</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.dataviz.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.dataviz.material.min.css" />
+
+    <script src="http://cdn.kendostatic.com/2015.1.429/js/jquery.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.all.min.js"></script>
+</head>
+<body>
+    <style>
+        .headimage {
+            background-image: url(../../Content/Img/images.jpg);
+        }
+
+        .font {
+            color: white;
+            text-align: center;
+            font-size: 2px;
+        }
+
+        .book {
+            width: 55%;
+            height: 40%;
+            margin: 5px auto;
+            position: relative;
+            left: 50px;
+        }
+    </style>
+    <div class="jumbotron headimage font">
+        <h1>點名系統</h1>
+        <p class="lead font">我當你，因為你沒來 </p>
+    </div>
+
+
+
+    @using (Html.BeginForm("Create", "add"))
+    {
+        <select name="subID">
+            <option value="1">C#</option>
+            <option value="2">ASP</option>
+        </select>
+        <table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="hidden" name="stuID" value="@Html.DisplayFor(modelItem => item.stu_ID)">
+                    </td>
+                    <td>
+                        <input type="radio" name="arr" value="yes">出席
+                        <input type="radio" name="arr" value="no">缺席
+                    <td width="50" align="right">
+                        @Html.DisplayFor(modelItem => item.stu_ID)
+                    </td>
+                    <td width="50" align="right">
+                        @Html.DisplayFor(modelItem => item.stu_Name)
+                    </td>
+                    <td width="250" align="right">
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        @Html.ActionLink("Create New", "Create")
+                    </td>
+                </tr>
+            }
+        </table>
+
+
+        <input class="btn btn-primary" type="submit" name="SB" value="送出表單">
+    }
+
+</body>
+</html>
